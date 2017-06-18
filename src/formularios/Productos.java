@@ -1,19 +1,28 @@
 
 package formularios;
 
+import static formularios.Boleta.tabla6;
+import java.awt.Desktop;
+import java.io.File;
+import java.nio.Buffer;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.sql.Connection;
+import java.util.Scanner;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import metodos.Conexion;
 import metodos.Crud;
+import metodos.GenerarPdf;
 
 
 public class Productos extends javax.swing.JInternalFrame {
     String idpro, sto ,cod, nom, cate, cos, ven, uti;
+    String [] titulos={"Id articulo", "Codigo", "Nombre", "Stock", "Costo", "Venta", "Categoria"};
+    DefaultTableModel model;
+    
     
     private Crud crudp;
     DefaultTableModel modelo = new DefaultTableModel();
@@ -21,6 +30,9 @@ public class Productos extends javax.swing.JInternalFrame {
     
     public Productos() throws SQLException {
         initComponents();
+        model=new DefaultTableModel(null,titulos);
+        jTableProductos.setModel(model); 
+        TablaProductos();
         jtidarticulo.setEditable(false);
         jtutilidad.setEditable(false);
         cargar("");
@@ -40,9 +52,34 @@ public class Productos extends javax.swing.JInternalFrame {
         for(int i=0; i<lista.size(); i++){
             jccategoria.addItem(lista.get(i)); 
         }
-    
+        
+        /*Scanner buffer=new Scanner(System.in);
+        String hola;
+        hola=buffer.nextLine();
+        jtcodigo.setText("hola");*/
     }
     
+    public void TablaProductos(){
+        Conexion cc= new Conexion();
+        Connection cn= cc.getConexcionMYSQL();
+        String [] registros= new String[8];
+        try {
+            String cons="SELECT * FROM articulo WHERE stock<=5";
+            Statement st= cn.createStatement();
+            ResultSet rs = st.executeQuery(cons);
+            while(rs.next()){
+                registros[0]=rs.getString(1);
+                registros[1]=rs.getString(2);
+                registros[2]=rs.getString(3);
+                registros[3]=rs.getString(4);
+                registros[4]=rs.getString(5);
+                registros[5]=rs.getString(6);
+                registros[6]=rs.getString(8);
+                model.addRow(registros);
+            }
+        } catch (Exception e) {
+        }
+    }
     
     private void limpiarTabla(){
         for(int i = 0; i < modelo.getRowCount(); i++){
@@ -86,6 +123,10 @@ public class Productos extends javax.swing.JInternalFrame {
         jccategoria = new javax.swing.JComboBox<>();
         btnguardar = new javax.swing.JButton();
         btncancelar = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableProductos = new javax.swing.JTable();
+        btnReporte = new javax.swing.JButton();
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel9.setText("Utilidad");
@@ -95,6 +136,11 @@ public class Productos extends javax.swing.JInternalFrame {
         setTitle("Productos");
         setPreferredSize(new java.awt.Dimension(700, 565));
         setRequestFocusEnabled(false);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
         jTabbedPane1.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
 
@@ -131,12 +177,17 @@ public class Productos extends javax.swing.JInternalFrame {
         jLabel11.setText("Buscar");
 
         jtbuscar.setFont(new java.awt.Font("Segoe UI Light", 0, 13)); // NOI18N
-        jtbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtbuscarKeyReleased(evt);
+        jtbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtbuscarActionPerformed(evt);
             }
+        });
+        jtbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtbuscarKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtbuscarKeyReleased(evt);
             }
         });
 
@@ -201,6 +252,18 @@ public class Productos extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("Buscar", jPanel1);
 
+        jPanel2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jPanel2KeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel2KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jPanel2KeyReleased(evt);
+            }
+        });
+
         jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
         jLabel1.setText("Datos del articulo");
 
@@ -250,11 +313,11 @@ public class Productos extends javax.swing.JInternalFrame {
             }
         });
         jtprecost.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtprecostKeyReleased(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtprecostKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtprecostKeyReleased(evt);
             }
         });
 
@@ -329,7 +392,7 @@ public class Productos extends javax.swing.JInternalFrame {
                                 .addComponent(btnguardar)
                                 .addGap(18, 18, 18)
                                 .addComponent(btncancelar)))
-                        .addContainerGap(416, Short.MAX_VALUE))
+                        .addContainerGap(523, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
@@ -384,7 +447,7 @@ public class Productos extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(jccategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnguardar)
                     .addComponent(btncancelar))
@@ -392,6 +455,51 @@ public class Productos extends javax.swing.JInternalFrame {
         );
 
         jTabbedPane1.addTab("Nuevo / modificar", jPanel2);
+
+        jTableProductos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTableProductos);
+
+        btnReporte.setText("Generar Reporte");
+        btnReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReporteActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(btnReporte)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                .addComponent(btnReporte)
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("Productos a agotar", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -604,11 +712,7 @@ public class Productos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtcodigoActionPerformed
 
     private void jtcodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtcodigoKeyTyped
-         char c=evt.getKeyChar(); 
-          if(Character.isLetter(c)) { 
-              getToolkit().beep(); 
-              evt.consume(); 
-          } 
+          
     }//GEN-LAST:event_jtcodigoKeyTyped
 
     private void jtnombreproKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtnombreproKeyTyped
@@ -651,8 +755,75 @@ public class Productos extends javax.swing.JInternalFrame {
           }
     }//GEN-LAST:event_jtprevenKeyTyped
 
+    private void jtbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtbuscarActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_jtbuscarActionPerformed
+
+    private void jPanel2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel2KeyReleased
+     char c=evt.getKeyChar();    
+      String h=String.valueOf(c);
+      if(c=='a'){
+          jtcodigo.setText("123");
+      }//
+// TODO add your handling code here:
+    }//GEN-LAST:event_jPanel2KeyReleased
+
+    private void jPanel2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel2KeyTyped
+      char c=evt.getKeyChar();     
+      String h=String.valueOf(c);
+      if(c=='a'){
+          jtcodigo.setText("123");
+      }//
+    }//GEN-LAST:event_jPanel2KeyTyped
+
+    private void jPanel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel2KeyPressed
+        char c=evt.getKeyChar();     
+      String h=String.valueOf(c);
+      if(c=='a'){
+          jtcodigo.setText("123");
+      }//
+    }//GEN-LAST:event_jPanel2KeyPressed
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        char c=evt.getKeyChar();     
+      String h=String.valueOf(c);
+      if(c=='a'){
+          jtcodigo.setText("123");
+      }// TODO add your handling code here:// TODO add your handling code here:
+    }//GEN-LAST:event_formKeyPressed
+
+    private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
+        String datos="Codigo  Nombre  Stock  Categoria  Cantidad  \n";
+        for(int j=0;j<jTableProductos.getRowCount();j++){
+            datos+=jTableProductos.getValueAt(j, 1)+"    ";
+            datos+=jTableProductos.getValueAt(j, 2)+"    ";
+            datos+=jTableProductos.getValueAt(j, 3)+"    ";
+            datos+=jTableProductos.getValueAt(j, 6)+"    ";
+            datos+="\n";
+        }
+        GenerarPdf pdf=new GenerarPdf();
+        pdf.generarPDF("Reporte de productos", datos, "0", "reporte.pdf");
+        abrirarchivo("reporte.pdf");
+        
+    }//GEN-LAST:event_btnReporteActionPerformed
+public void abrirarchivo(String archivo){
+
+     try {
+
+            File objetofile = new File (archivo);
+            Desktop.getDesktop().open(objetofile);
+
+     }catch (Exception ex) {
+
+            System.out.println(ex);
+
+     }
+
+}                   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnReporte;
     private javax.swing.JButton btnbuscar;
     private javax.swing.JButton btncancelar;
     private javax.swing.JButton btnguardar;
@@ -670,8 +841,11 @@ public class Productos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTableProductos;
     private javax.swing.JButton jbeliminar;
     private javax.swing.JButton jbmodificar;
     private javax.swing.JComboBox<String> jccategoria;

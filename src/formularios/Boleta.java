@@ -21,11 +21,13 @@ import metodos.GenerarNumero;
 
 
 public class Boleta extends javax.swing.JInternalFrame {
-
+String [] titulos={"Id articulo", "Codigo", "Nombre", "Venta", "Categoria", "Cantidad", "Venta total"};
+DefaultTableModel model;        
     
     public Boleta() {
         initComponents();
-        
+        model=new DefaultTableModel(null,titulos);
+        tabla6.setModel(model);    
         jtnumero.setEnabled(false);
         jtfecha.setText(fechaact());
         jtfecha.setEditable(false);
@@ -191,6 +193,8 @@ public class Boleta extends javax.swing.JInternalFrame {
         btneliminar = new javax.swing.JButton();
         btnventa = new javax.swing.JButton();
         btnsalir = new javax.swing.JButton();
+        jtcodigo = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -215,6 +219,7 @@ public class Boleta extends javax.swing.JInternalFrame {
         jLabel3.setText("Productos");
 
         jButton1.setText("Buscar");
+        jButton1.setNextFocusableComponent(jtcodigo);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -262,6 +267,20 @@ public class Boleta extends javax.swing.JInternalFrame {
             }
         });
 
+        jtcodigo.setNextFocusableComponent(jtcodigo);
+        jtcodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtcodigoActionPerformed(evt);
+            }
+        });
+        jtcodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtcodigoKeyReleased(evt);
+            }
+        });
+
+        jLabel7.setText("Codigo de barras");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -273,36 +292,45 @@ public class Boleta extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel2))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtfecha)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
-                                .addComponent(jtnumero, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(37, 37, 37))))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jtfecha)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jtnumero, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addContainerGap())
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(37, 37, 37))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jtcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(413, 413, 413)
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
-                        .addComponent(jttotal, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(28, 28, 28)
+                        .addComponent(jttotal, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1)
+                        .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btncalculo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btneliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnventa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnsalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,9 +348,12 @@ public class Boleta extends javax.swing.JInternalFrame {
                     .addComponent(jButton1)
                     .addComponent(jtnumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btncalculo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -330,8 +361,9 @@ public class Boleta extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnventa)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnsalir)))
-                .addGap(33, 33, 33)
+                        .addComponent(btnsalir))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jttotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
@@ -350,6 +382,8 @@ public class Boleta extends javax.swing.JInternalFrame {
         
          } catch (Exception e) {
     }
+         jtcodigo.isFocusable();
+         jtcodigo.setFocusable(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btncalculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncalculoActionPerformed
@@ -406,6 +440,72 @@ public class Boleta extends javax.swing.JInternalFrame {
          this.dispose();
     }//GEN-LAST:event_btnsalirActionPerformed
 
+    private void jtcodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtcodigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtcodigoActionPerformed
+
+    private void jtcodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtcodigoKeyReleased
+        if (evt.getKeyCode()==evt.VK_ENTER) 
+            enviar();// TODO add your handling code here:
+    }//GEN-LAST:event_jtcodigoKeyReleased
+    public void enviar(){
+        String codigo;
+        codigo=jtcodigo.getText();
+        jtcodigo.setText("");
+        Conexion cc= new Conexion();
+        Connection cn= cc.getConexcionMYSQL();
+        String [] registros= new String[8];
+        try {
+            String cons="SELECT * FROM articulo WHERE codigo='"+codigo+"'";
+            Statement st= cn.createStatement();
+            ResultSet rs = st.executeQuery(cons);
+            String comp="";
+            int k=0;
+            while(rs.next()){
+                registros[0]=rs.getString(1);
+                registros[1]=rs.getString(2);
+                registros[2]=rs.getString(3);
+                registros[3]=rs.getString(6);
+                registros[4]=rs.getString(8);
+                registros[5]="1";
+                registros[6]=rs.getString(6);
+                //System.out.println(tabla6.getRowCount());
+                if(tabla6.getRowCount()>0){
+                    for(int i=0;i<tabla6.getRowCount();i++){
+                        comp=tabla6.getValueAt(i, 1).toString();
+                        System.out.println(comp+" "+i);
+                        System.out.println(registros[1]+" as "+i);
+                        if(comp == null ? registros[1] == null : comp.equals(registros[1])){
+                            
+                            int cont=Integer.parseInt(tabla6.getValueAt(i,5).toString());
+                            System.out.println(cont+"asa \n");
+                            cont++;
+                            int total=0;
+                            total=Integer.parseInt(registros[6])*cont;
+                            //System.out.println(cont+"\n");
+                            tabla6.setValueAt(cont, i, 5);
+                            tabla6.setValueAt(total, i, 6);
+                            k=1;
+                        }
+                    }
+                }
+                if(k==0){
+                    model.addRow(registros);
+                }
+                
+                
+            }
+            //Id articulo", "Codigo", "Nombre", "Venta", "Categoria", "Cantidad", "Venta total
+            
+            /**/
+                      
+                //}
+            
+            //tabla6.setModel(model);
+        } catch (Exception e) {
+            System.out.println("Error");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btncalculo;
@@ -419,7 +519,9 @@ public class Boleta extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jtcodigo;
     private javax.swing.JTextField jtfecha;
     private javax.swing.JTextField jtnumero;
     private javax.swing.JTextField jttotal;

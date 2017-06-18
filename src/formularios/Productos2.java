@@ -178,67 +178,63 @@ public class Productos2 extends javax.swing.JInternalFrame {
 
     private void btnenviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnenviarActionPerformed
         try {
-         DefaultTableModel tabladet = (DefaultTableModel)     Boleta.tabla6.getModel();  //tbdetbol = tabla6 tbprod = tabla5
-         String[]  dato = new String[8];
-   
-         int  fila = tabla5.getSelectedRow();
-    
-    
-    if(fila==-1){
-        JOptionPane.showMessageDialog(null, "No  ha seleccionado ningun registro");
-    }
-    else
-    {
-        String id=tabla5.getValueAt(fila, 0).toString();
-        String codigo=tabla5.getValueAt(fila, 1).toString();
-        String nombre=tabla5.getValueAt(fila, 2).toString();
-        String venta=tabla5.getValueAt(fila, 5).toString();
-        String categoria=tabla5.getValueAt(fila, 7).toString();
-        int c=0;
-        int j=0;
-         String  cant=JOptionPane.showInputDialog("ingrese cantidad");
-        if((cant.equals("")) || (cant.equals("0")))
-        {
-            JOptionPane.showMessageDialog(this, "Debe ingresar algun valor mayor que 0");
-        }
-        else
-        {
-            int canting=Integer.parseInt(cant);
-             int comp=Integer.parseInt(comparar(Integer.parseInt(id)));
-             if(canting>comp)
-             {
-                 JOptionPane.showMessageDialog(this,"Ud. no cuenta con el stock apropiado");
-             }
-             else
-             {
-                for(int i=0;i<Boleta.tabla6.getRowCount();i++){
-                    Object com=Boleta.tabla6.getValueAt(i,0);
-                    if(id.equals(com)){
-                        j=i;
-                        Boleta.tabla6.setValueAt(cant, i, 5);
-                        c=c+1;
-                    }
-                    cargar("");
-                 }
-                if(c==0){
-                    dato[0]=id;
-                    dato[1]=codigo;
-                    dato[2]=nombre;
-                    dato[3]=venta;
-                    dato[4]=categoria;
-                    dato[5]=cant;
-            
-                    tabladet.addRow(dato);
-        
-                    Boleta.tabla6.setModel(tabladet); 
-                    
+            DefaultTableModel tabladet = (DefaultTableModel) Boleta.tabla6.getModel();  //tbdetbol = tabla6 tbprod = tabla5
+            String[]  dato = new String[8];
+            int  fila = tabla5.getSelectedRow();
+            if(fila==-1){
+                JOptionPane.showMessageDialog(null, "No  ha seleccionado ningun registro");
+            }
+            else{
+                String id=tabla5.getValueAt(fila, 0).toString();
+                String codigo=tabla5.getValueAt(fila, 1).toString();
+                String nombre=tabla5.getValueAt(fila, 2).toString();
+                String venta=tabla5.getValueAt(fila, 5).toString();
+                String categoria=tabla5.getValueAt(fila, 7).toString();
+                int c=0;
+                int j=0;
+                String  cant=JOptionPane.showInputDialog("ingrese cantidad");
+                if((cant.equals("")) || (cant.equals("0")))
+                {
+                    JOptionPane.showMessageDialog(this, "Debe ingresar algun valor mayor que 0");
                 }
-        }
+                else
+                {
+                    int canting=Integer.parseInt(cant);
+                    int comp=Integer.parseInt(comparar(Integer.parseInt(id)));
+                    if(canting>comp)
+                    {
+                        JOptionPane.showMessageDialog(this,"Ud. no cuenta con el stock apropiado");
+                    }
+                    else
+                    {
+                        for(int i=0;i<Boleta.tabla6.getRowCount();i++){
+                            Object com=Boleta.tabla6.getValueAt(i,0);
+                            if(id.equals(com)){
+                                j=i;
+                                Boleta.tabla6.setValueAt(cant, i, 5);
+                                c=c+1;
+                            }
+                            cargar("");
+                        }
+                        if(c==0){
+                            dato[0]=id;
+                            dato[1]=codigo;
+                            dato[2]=nombre;
+                            dato[3]=venta;
+                            dato[4]=categoria;
+                            dato[5]=cant;
+
+                            tabladet.addRow(dato);
+        
+                            Boleta.tabla6.setModel(tabladet); 
+                    
+                        }
+                    }
   
-    }   
-    }
-    } catch (Exception e) {
-    }
+                }   
+            }
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_btnenviarActionPerformed
 
 
