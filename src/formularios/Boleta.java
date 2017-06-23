@@ -94,7 +94,7 @@ DefaultTableModel model;
         }    
     }
     
-    void calcular(){
+    static void calcular(){
         String pre, can;
         double subtotal=0, precio, imp=0.0;
         int cantidad;
@@ -488,6 +488,7 @@ DefaultTableModel model;
                             k=1;
                         }
                     }
+                    
                 }
                 if(k==0){
                     model.addRow(registros);
@@ -495,6 +496,7 @@ DefaultTableModel model;
                 
                 
             }
+            
             //Id articulo", "Codigo", "Nombre", "Venta", "Categoria", "Cantidad", "Venta total
             
             /**/
@@ -524,7 +526,7 @@ DefaultTableModel model;
     private javax.swing.JTextField jtcodigo;
     private javax.swing.JTextField jtfecha;
     private javax.swing.JTextField jtnumero;
-    private javax.swing.JTextField jttotal;
+    private static javax.swing.JTextField jttotal;
     public static javax.swing.JTable tabla6;
     // End of variables declaration//GEN-END:variables
 }

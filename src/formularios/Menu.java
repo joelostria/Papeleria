@@ -50,7 +50,7 @@ public class Menu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setExtendedState(6);
 
-        escritorio.setBackground(new java.awt.Color(3, 169, 244));
+        escritorio.setBackground(new java.awt.Color(2, 136, 209));
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);

@@ -227,6 +227,7 @@ public class Productos2 extends javax.swing.JInternalFrame {
                             tabladet.addRow(dato);
         
                             Boleta.tabla6.setModel(tabladet); 
+                            Boleta.calcular();
                     
                         }
                     }

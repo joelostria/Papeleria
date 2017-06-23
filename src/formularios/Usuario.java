@@ -295,7 +295,7 @@ public class Usuario extends javax.swing.JInternalFrame {
         int i = tabla3.getSelectedRow();
         if(i==-1) 
         { 
-           JOptionPane.showMessageDialog(null,"Seleccione una categoria"); 
+           JOptionPane.showMessageDialog(null,"Seleccione un usuario"); 
         }else{
            idusu = String.valueOf(tabla3.getValueAt(i,0));
            nomb =String.valueOf(tabla3.getValueAt(i,1));
@@ -336,7 +336,7 @@ public class Usuario extends javax.swing.JInternalFrame {
         if(band == 1){
             int idusuar = Integer.parseInt(jtidusu.getText());
             if(crudu.update(idusuar,nom,pat,mat,tel,usu,clav)){
-                JOptionPane.showMessageDialog(this, "Articulo modificado con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Usuario modificado con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
                 jtnomb.setText("");
                 jtpaterno.setText("");
                 jtmaterno.setText("");
@@ -355,7 +355,7 @@ public class Usuario extends javax.swing.JInternalFrame {
            
 
              if(crudu.insert(nom, pat, mat, tel, usu, clav)){
-                JOptionPane.showMessageDialog(this,"El articulo ha sido registrada con exito","Exito",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this,"El usuario ha sido registrada con exito","Exito",JOptionPane.INFORMATION_MESSAGE);
                jtnomb.setText("");
                 jtpaterno.setText("");
                 jtmaterno.setText("");
