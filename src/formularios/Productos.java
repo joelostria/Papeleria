@@ -2,6 +2,7 @@
 package formularios;
 
 import static formularios.Boleta.tabla6;
+import java.awt.Color;
 import java.awt.Desktop;
 import java.io.File;
 import java.nio.Buffer;
@@ -57,6 +58,7 @@ public class Productos extends javax.swing.JInternalFrame {
         String hola;
         hola=buffer.nextLine();
         jtcodigo.setText("hola");*/
+        
     }
     
     public void TablaProductos(){
@@ -802,9 +804,14 @@ public class Productos extends javax.swing.JInternalFrame {
             datos+=jTableProductos.getValueAt(j, 6)+"    ";
             datos+="\n";
         }
-        GenerarPdf pdf=new GenerarPdf();
-        pdf.generarPDF("Reporte de productos", datos, "0", "reporte.pdf");
-        abrirarchivo("reporte.pdf");
+        try {
+            GenerarPdf pdf=new GenerarPdf();
+            pdf.generarPDF("Reporte de productos", datos, "0", "reporte.pdf");
+            abrirarchivo("reporte.pdf");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Error generando PDF consulte con el administrador de sistema","Mensaje de Error", JOptionPane.ERROR_MESSAGE); 
+        }
+        
         
     }//GEN-LAST:event_btnReporteActionPerformed
 public void abrirarchivo(String archivo){

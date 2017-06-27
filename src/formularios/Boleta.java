@@ -467,9 +467,19 @@ DefaultTableModel model;
                 registros[2]=rs.getString(3);
                 registros[3]=rs.getString(6);
                 registros[4]=rs.getString(8);
-                registros[5]="1";
-                registros[6]=rs.getString(6);
+                registros[5]=JOptionPane.showInputDialog("ingrese cantidad");;
+                //registros[6]=rs.getString(6);
+                int venta=Integer.parseInt(registros[5])*Integer.parseInt(rs.getString(6));
+                registros[6]=String.valueOf(venta);
                 //System.out.println(tabla6.getRowCount());
+                registros[7]=rs.getString(4);
+                int stock=Integer.parseInt(registros[7]);
+                if (stock<Integer.parseInt(registros[5]))
+                    JOptionPane.showMessageDialog(null,"Producto agotado o insufuciente", "Mensaje de Error",JOptionPane.ERROR_MESSAGE);k=1; //Tipo de mensaje
+
+                
+                
+                
                 if(tabla6.getRowCount()>0){
                     for(int i=0;i<tabla6.getRowCount();i++){
                         comp=tabla6.getValueAt(i, 1).toString();
@@ -493,6 +503,11 @@ DefaultTableModel model;
                 if(k==0){
                     model.addRow(registros);
                 }
+                int total2=0;
+                for (int i=0;i<tabla6.getRowCount();i++){
+                    total2+=Integer.parseInt(tabla6.getValueAt(i, 6).toString());
+                }
+                jttotal.setText(""+total2);
                 
                 
             }
