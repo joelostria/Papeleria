@@ -469,13 +469,15 @@ DefaultTableModel model;
                 registros[4]=rs.getString(8);
                 registros[5]=JOptionPane.showInputDialog("ingrese cantidad");;
                 //registros[6]=rs.getString(6);
-                int venta=Integer.parseInt(registros[5])*Integer.parseInt(rs.getString(6));
+                float venta=Integer.parseInt(registros[5])*Float.parseFloat(rs.getString(6));
                 registros[6]=String.valueOf(venta);
                 //System.out.println(tabla6.getRowCount());
                 registros[7]=rs.getString(4);
                 int stock=Integer.parseInt(registros[7]);
-                if (stock<Integer.parseInt(registros[5]))
-                    JOptionPane.showMessageDialog(null,"Producto agotado o insufuciente", "Mensaje de Error",JOptionPane.ERROR_MESSAGE);k=1; //Tipo de mensaje
+                if (stock<Integer.parseInt(registros[5])){
+                    JOptionPane.showMessageDialog(null,"Producto agotado o insufuciente", "Mensaje de Error",JOptionPane.ERROR_MESSAGE);
+                    k=1;
+                } 
 
                 
                 
@@ -487,14 +489,14 @@ DefaultTableModel model;
                         System.out.println(registros[1]+" as "+i);
                         if(comp == null ? registros[1] == null : comp.equals(registros[1])){
                             
-                            int cont=Integer.parseInt(tabla6.getValueAt(i,5).toString());
+                            /*int cont=Integer.parseInt(tabla6.getValueAt(i,5).toString());
                             System.out.println(cont+"asa \n");
-                            cont++;
-                            int total=0;
-                            total=Integer.parseInt(registros[6])*cont;
+                            cont++;*/
+                            float total=0;
+                            total=Float.parseFloat(registros[6])*Integer.parseInt(registros[5]);
                             //System.out.println(cont+"\n");
-                            tabla6.setValueAt(cont, i, 5);
-                            tabla6.setValueAt(total, i, 6);
+                            tabla6.setValueAt(Integer.parseInt(registros[5]), i, 5);
+                            tabla6.setValueAt(venta, i, 6);
                             k=1;
                         }
                     }
@@ -503,9 +505,9 @@ DefaultTableModel model;
                 if(k==0){
                     model.addRow(registros);
                 }
-                int total2=0;
+                float total2=0;
                 for (int i=0;i<tabla6.getRowCount();i++){
-                    total2+=Integer.parseInt(tabla6.getValueAt(i, 6).toString());
+                    total2+=Float.parseFloat(tabla6.getValueAt(i, 6).toString());
                 }
                 jttotal.setText(""+total2);
                 
