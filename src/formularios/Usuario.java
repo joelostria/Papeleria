@@ -320,6 +320,8 @@ public class Usuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnmodificarActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
+            
+            
             String nom = jtnomb.getText();
             String pat = jtpaterno.getText();
             String mat = jtmaterno.getText();
@@ -328,7 +330,7 @@ public class Usuario extends javax.swing.JInternalFrame {
             String clav = jtclave.getText();
             
              //Si un jtextfield esta vacio mandar error
-            if(nom.trim().length()== 0 && pat.trim().length()== 0 && mat.trim().length()== 0 && tel.trim().length()== 0 && usu.trim().length()== 0 && clav.trim().length()== 0){
+            if(nom.trim().length()== 0 || pat.trim().length()== 0 || mat.trim().length()== 0 || tel.trim().length()== 0 || usu.trim().length()== 0 || clav.trim().length()== 0){
                 JOptionPane.showMessageDialog(this, "Falta llenar algunos datos", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }

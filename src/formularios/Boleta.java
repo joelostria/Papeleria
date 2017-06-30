@@ -22,7 +22,7 @@ import metodos.GenerarNumero;
 
 public class Boleta extends javax.swing.JInternalFrame {
 String [] titulos={"Id articulo", "Codigo", "Nombre", "Venta", "Categoria", "Cantidad", "Venta total"};
-DefaultTableModel model;        
+DefaultTableModel model;   
     
     public Boleta() {
         initComponents();
@@ -210,15 +210,19 @@ DefaultTableModel model;
                 "Id articulo", "Codigo", "Nombre", "Venta", "Categoria", "Cantidad", "Venta total"
             }
         ));
+        tabla6.setFocusable(false);
         jScrollPane1.setViewportView(tabla6);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel2.setText("Fecha");
 
+        jtfecha.setFocusable(false);
+
         jLabel3.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel3.setText("Productos");
 
         jButton1.setText("Buscar");
+        jButton1.setFocusable(false);
         jButton1.setNextFocusableComponent(jtcodigo);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -232,11 +236,16 @@ DefaultTableModel model;
         jLabel5.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel5.setText("Nº");
 
+        jtnumero.setFocusable(false);
+
+        jttotal.setFocusable(false);
+
         jLabel6.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel6.setText("Total");
 
         btncalculo.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         btncalculo.setText("Realizar calculo");
+        btncalculo.setFocusable(false);
         btncalculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btncalculoActionPerformed(evt);
@@ -245,6 +254,7 @@ DefaultTableModel model;
 
         btneliminar.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         btneliminar.setText("Eliminar");
+        btneliminar.setFocusable(false);
         btneliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btneliminarActionPerformed(evt);
@@ -253,6 +263,7 @@ DefaultTableModel model;
 
         btnventa.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         btnventa.setText("Realizar venta");
+        btnventa.setFocusable(false);
         btnventa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnventaActionPerformed(evt);
@@ -400,6 +411,9 @@ DefaultTableModel model;
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
         DefaultTableModel model = (DefaultTableModel) tabla6.getModel();
         int fila = tabla6.getSelectedRow();
+        double totalmenos=Double.parseDouble(jttotal.getText());
+        double sub=Double.parseDouble(tabla6.getValueAt(fila, 6).toString());
+        double totalfinal=totalmenos-sub;
         if(fila>=0)
         {
             model.removeRow(fila);
@@ -408,6 +422,7 @@ DefaultTableModel model;
         {
          JOptionPane.showMessageDialog(null, "Tabla vacia o no se selecciono ninguna fila");
         }
+        jttotal.setText(""+totalfinal);
     }//GEN-LAST:event_btneliminarActionPerformed
 
     private void btnventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnventaActionPerformed

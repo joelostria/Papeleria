@@ -214,6 +214,7 @@ public class Productos2 extends javax.swing.JInternalFrame {
                                 Boleta.tabla6.setValueAt(cant, i, 5);
                                 c=c+1;
                             }
+                            Boleta.calcular();
                             cargar("");
                         }
                         if(c==0){
@@ -223,11 +224,13 @@ public class Productos2 extends javax.swing.JInternalFrame {
                             dato[3]=venta;
                             dato[4]=categoria;
                             dato[5]=cant;
+                            double total2=Double.parseDouble(venta)*Double.parseDouble(cant);
+                            dato[6]=String.valueOf(total2);
 
                             tabladet.addRow(dato);
-        
-                            Boleta.tabla6.setModel(tabladet); 
                             Boleta.calcular();
+                            Boleta.tabla6.setModel(tabladet); 
+                            
                     
                         }
                     }

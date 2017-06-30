@@ -525,18 +525,31 @@ public class Productos extends javax.swing.JInternalFrame {
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
             //Recuperamos los valores de los jtextfield
-          
-            String codi = jtcodigo.getText();
-            String nomb = jtnombrepro.getText();
-            int sto = Integer.parseInt(jtstock.getText());
-            float cost = Float.parseFloat(jtprecost.getText());
-            float vent = Float.parseFloat(jtpreven.getText());
-            float uti = Float.parseFloat(jtutilidad.getText());
-            String cat = (String)jccategoria.getSelectedItem();
+          String codi="";
+          String nomb="";
+          int sto=0;
+          float cost=0;
+          float vent=0;
+          float uti=0;
+          String cat="";
+                  
+        try {
+            codi= jtcodigo.getText();
+            nomb = jtnombrepro.getText();
+            sto = Integer.parseInt(jtstock.getText());
+            cost = Float.parseFloat(jtprecost.getText());
+            vent= Float.parseFloat(jtpreven.getText());
+            uti= Float.parseFloat(jtutilidad.getText());
+            cat= (String)jccategoria.getSelectedItem();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Falta llenar algunos datos", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+            
             
              //Si un jtextfield esta vacio mandar error
             if(codi.trim().length()== 0 && nomb.trim().length()== 0){
-                JOptionPane.showMessageDialog(this, "Falta llenar algunos datos", "Error", JOptionPane.ERROR_MESSAGE);
+                //JOptionPane.showMessageDialog(this, "Falta llenar algunos datos", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             
