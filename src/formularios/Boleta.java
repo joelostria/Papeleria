@@ -194,7 +194,6 @@ DefaultTableModel model;
         jtnumero = new javax.swing.JTextField();
         jttotal = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        btncalculo = new javax.swing.JButton();
         btneliminar = new javax.swing.JButton();
         btnventa = new javax.swing.JButton();
         btnsalir = new javax.swing.JButton();
@@ -247,15 +246,6 @@ DefaultTableModel model;
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel6.setText("Total");
-
-        btncalculo.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        btncalculo.setText("Realizar calculo");
-        btncalculo.setFocusable(false);
-        btncalculo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btncalculoActionPerformed(evt);
-            }
-        });
 
         btneliminar.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         btneliminar.setText("Eliminar");
@@ -342,7 +332,6 @@ DefaultTableModel model;
                         .addComponent(jScrollPane1)
                         .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btncalculo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btneliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnventa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -371,8 +360,7 @@ DefaultTableModel model;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btncalculo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(42, 42, 42)
                         .addComponent(btneliminar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnventa)
@@ -401,17 +389,6 @@ DefaultTableModel model;
          jtcodigo.isFocusable();
          jtcodigo.setFocusable(true);
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void btncalculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncalculoActionPerformed
-         if(tabla6.getRowCount()<1)
-         {
-            JOptionPane.showMessageDialog(this, "ingrese algun producto");
-          }
-          else
-          {
-            calcular();
-          }
-    }//GEN-LAST:event_btncalculoActionPerformed
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
         DefaultTableModel model = (DefaultTableModel) tabla6.getModel();
@@ -497,6 +474,7 @@ DefaultTableModel model;
                 if (stock<Integer.parseInt(registros[5])){
                     JOptionPane.showMessageDialog(null,"Producto agotado o insufuciente", "Mensaje de Error",JOptionPane.ERROR_MESSAGE);
                     k=1;
+                    return;
                 } 
 
                 
@@ -547,7 +525,6 @@ DefaultTableModel model;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btncalculo;
     private javax.swing.JButton btneliminar;
     private javax.swing.JButton btnsalir;
     private javax.swing.JButton btnventa;
