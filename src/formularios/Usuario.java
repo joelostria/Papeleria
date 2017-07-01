@@ -44,7 +44,7 @@ public class Usuario extends javax.swing.JInternalFrame {
             }
         }catch(Exception e){
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Erroooor al cargar los datos de la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error al cargar los datos de la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
         }
         
     }
@@ -357,7 +357,7 @@ public class Usuario extends javax.swing.JInternalFrame {
            
 
              if(crudu.insert(nom, pat, mat, tel, usu, clav)){
-                JOptionPane.showMessageDialog(this,"El usuario ha sido registrada con exito","Exito",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this,"El usuario ha sido registrado con exito","Exito",JOptionPane.INFORMATION_MESSAGE);
                jtnomb.setText("");
                 jtpaterno.setText("");
                 jtmaterno.setText("");
