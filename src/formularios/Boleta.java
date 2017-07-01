@@ -243,6 +243,7 @@ DefaultTableModel model;
 
         jtnumero.setFocusable(false);
 
+        jttotal.setEditable(false);
         jttotal.setFocusable(false);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
