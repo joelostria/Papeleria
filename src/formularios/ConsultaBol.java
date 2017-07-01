@@ -114,6 +114,12 @@ public class ConsultaBol extends javax.swing.JInternalFrame {
             }
         });
 
+        jtnumero.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtnumeroKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -145,9 +151,9 @@ public class ConsultaBol extends javax.swing.JInternalFrame {
                             .addComponent(rdb1)
                             .addComponent(jtnumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rdb2)
-                            .addComponent(btnbuscar)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnbuscar, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(rdb2)))
                     .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rdb3)
@@ -220,7 +226,7 @@ public class ConsultaBol extends javax.swing.JInternalFrame {
         jtnumero.setEnabled(true);
         jtnumero.requestFocus();
         fecha.setEnabled(false);
-        fecha.setDate(null);   
+        
     }
     }//GEN-LAST:event_rdb1ActionPerformed
 
@@ -238,7 +244,6 @@ public class ConsultaBol extends javax.swing.JInternalFrame {
        if(rdb3.isSelected()==true)
     {
         fecha.setEnabled(false);
-        fecha.setDate(null);
         jtnumero.setText("");
         jtnumero.setEnabled(false);
         cargartodasBoletas();
@@ -250,8 +255,15 @@ public class ConsultaBol extends javax.swing.JInternalFrame {
         Connection cn= cc.getConexcionMYSQL();
         String consulta="";
     if(rdb1.isSelected()==true){
-        int num=Integer.parseInt(jtnumero.getText());
-        consulta= "SELECT * FROM boleta WHERE num_boleta='"+num+"'";
+        String numm = jtnumero.getText();
+        if(numm.trim().length()== 0){
+            JOptionPane.showMessageDialog(this, "Debe insertar el numero de boleta", "Error", JOptionPane.ERROR_MESSAGE);
+            cargartodasBoletas();
+        }
+        else{
+             int num=Integer.parseInt(jtnumero.getText());
+             consulta= "SELECT * FROM boleta WHERE num_boleta='"+num+"'";
+        }
     }
     if(rdb2.isSelected()==true)
     {
@@ -350,6 +362,14 @@ public class ConsultaBol extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(this, "Seleccione alguna fila");
     }
     }//GEN-LAST:event_btneliminarActionPerformed
+
+    private void jtnumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtnumeroKeyTyped
+        char c=evt.getKeyChar(); 
+          if(Character.isLetter(c)) { 
+              getToolkit().beep(); 
+              evt.consume(); 
+          }
+    }//GEN-LAST:event_jtnumeroKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
