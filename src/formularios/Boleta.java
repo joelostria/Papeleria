@@ -179,7 +179,12 @@ DefaultTableModel model;
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabla6 = new javax.swing.JTable();
+        tabla6 =  new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false; //Disallow the editing of any cell
+            }
+        }
+        ;
         jLabel2 = new javax.swing.JLabel();
         jtfecha = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
