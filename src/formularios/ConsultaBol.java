@@ -23,14 +23,18 @@ import metodos.Conexion;
  * @author lemux_000
  */
 public class ConsultaBol extends javax.swing.JInternalFrame {
-
+    String usua;
     /**
      * Creates new form ConsultaBol
      */
     public ConsultaBol() {
         initComponents();
+        usua = Menu.getUsuario();
         cargartodasBoletas();
         fecha.setEnabled(false);
+        if(!"administrador".equals(usua)){
+           btneliminar.setEnabled(false);
+        }
     }
 
      void cargartodasBoletas(){

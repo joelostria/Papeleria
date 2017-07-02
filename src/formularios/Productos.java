@@ -20,7 +20,7 @@ import metodos.GenerarPdf;
 
 
 public class Productos extends javax.swing.JInternalFrame {
-    String idpro, sto ,cod, nom, cate, cos, ven, uti;
+    String idpro, sto ,cod, nom, cate, cos, ven, uti, usu;
     String [] titulos={"Id articulo", "Codigo", "Nombre", "Stock", "Costo", "Venta", "Categoria"};
     DefaultTableModel model;
     
@@ -31,6 +31,7 @@ public class Productos extends javax.swing.JInternalFrame {
     
     public Productos() throws SQLException {
         initComponents();
+        usu = Menu.getUsuario();
         model=new DefaultTableModel(null,titulos);
         jTableProductos.setModel(model); 
         TablaProductos();
@@ -58,6 +59,13 @@ public class Productos extends javax.swing.JInternalFrame {
         String hola;
         hola=buffer.nextLine();
         jtcodigo.setText("hola");*/
+        if(!"administrador".equals(usu)){
+            for(int i=0;i<jPanel2.getComponents().length;i++) {
+                jPanel2.getComponent(i).setEnabled(false);
+            }
+            jPanel1.getComponent(1).setEnabled(false);
+            jPanel1.getComponent(2).setEnabled(false);
+        }
         
     }
     
@@ -577,7 +585,7 @@ public class Productos extends javax.swing.JInternalFrame {
            
 
              if(crudp.insert(codi,nomb,sto,cost,vent,uti,cat)){
-                JOptionPane.showMessageDialog(this,"El articulo ha sido registrada con exito","Exito",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this,"El articulo ha sido registrado con exito","Exito",JOptionPane.INFORMATION_MESSAGE);
                jtidarticulo.setText("");
                 jtcodigo.setText("");
                 jtnombrepro.setText("");
@@ -634,7 +642,7 @@ public class Productos extends javax.swing.JInternalFrame {
             String idc = String.valueOf(tabla2.getValueAt(i,0));
             int idca = Integer.parseInt(idc);
             if(crudp.delete(idca)){
-                JOptionPane.showMessageDialog(this,"El articulo ha sido eliminada con exito","Exito",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this,"El articulo ha sido eliminado con exito","Exito",JOptionPane.INFORMATION_MESSAGE);
                 cargar("");
             }
             else{
@@ -822,7 +830,7 @@ public class Productos extends javax.swing.JInternalFrame {
             pdf.generarPDF("Reporte de productos", datos, "0", "reporte.pdf");
             abrirarchivo("reporte.pdf");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Error generando PDF consulte con el administrador de sistema","Mensaje de Error", JOptionPane.ERROR_MESSAGE); 
+            JOptionPane.showMessageDialog(null,"Error generando PDF. Consulte con el administrador de sistema","Mensaje de Error", JOptionPane.ERROR_MESSAGE); 
         }
         
         

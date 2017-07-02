@@ -14,7 +14,8 @@ public class MetodosLogin{
     String usuario;
     
     public int validar_ingreso(){
-        usuario = Login.txtUsuario.getText();
+        usuario = Login.txtUsuario.getText().replace(" ", "");
+        //System.out.println(usuario.length());
         String clave = String.valueOf(Login.txtClave.getPassword());
         int resultado=0;
         String SQL = "SELECT * FROM usuario WHERE usuario='"+usuario+"' AND clave='"+clave+"' ";

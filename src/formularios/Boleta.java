@@ -22,8 +22,7 @@ import metodos.GenerarNumero;
 
 public class Boleta extends javax.swing.JInternalFrame {
 String [] titulos={"Id articulo", "Codigo", "Nombre", "Venta", "Categoria", "Cantidad", "Venta total"};
-DefaultTableModel model;   
-    
+DefaultTableModel model;    
     public Boleta() {
         initComponents();
         model=new DefaultTableModel(null,titulos);
@@ -166,7 +165,7 @@ DefaultTableModel model;
           
            
             } catch (SQLException ex) {
-               JOptionPane.showMessageDialog(this, "Error al guard", "Error", JOptionPane.ERROR_MESSAGE);
+               JOptionPane.showMessageDialog(this, "Error al guardar", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     
@@ -393,19 +392,23 @@ DefaultTableModel model;
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
         DefaultTableModel model = (DefaultTableModel) tabla6.getModel();
-        int fila = tabla6.getSelectedRow();
-        double totalmenos=Double.parseDouble(jttotal.getText());
-        double sub=Double.parseDouble(tabla6.getValueAt(fila, 6).toString());
-        double totalfinal=totalmenos-sub;
-        if(fila>=0)
-        {
-            model.removeRow(fila);
+        try{
+            int fila = tabla6.getSelectedRow();
+            double totalmenos=Double.parseDouble(jttotal.getText());
+            double sub=Double.parseDouble(tabla6.getValueAt(fila, 6).toString());
+            double totalfinal=totalmenos-sub;
+            if(fila>=0 && fila!=-1){
+                model.removeRow(fila);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Tabla vacia o no se selecciono ninguna fila");
+            }
+            jttotal.setText(""+totalfinal);
+            
+        }catch(Exception e){
+           JOptionPane.showMessageDialog(null, "Tabla vacia o no se selecciono ninguna fila"); 
         }
-        else
-        {
-         JOptionPane.showMessageDialog(null, "Tabla vacia o no se selecciono ninguna fila");
-        }
-        jttotal.setText(""+totalfinal);
+       
     }//GEN-LAST:event_btneliminarActionPerformed
 
     private void btnventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnventaActionPerformed
@@ -473,7 +476,7 @@ DefaultTableModel model;
                 registros[7]=rs.getString(4);
                 int stock=Integer.parseInt(registros[7]);
                 if (stock<Integer.parseInt(registros[5])){
-                    JOptionPane.showMessageDialog(null,"Producto agotado o insufuciente", "Mensaje de Error",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"Producto agotado o insuficiente", "Mensaje de Error",JOptionPane.ERROR_MESSAGE);
                     k=1;
                     return;
                 } 

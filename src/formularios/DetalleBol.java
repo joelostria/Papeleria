@@ -42,8 +42,12 @@ public class DetalleBol extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel1.setText("Boleta");
 
+        jtbol.setEditable(false);
+
         jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel2.setText("Fecha");
+
+        jtfecha.setEditable(false);
 
         tabla8.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -57,6 +61,8 @@ public class DetalleBol extends javax.swing.JInternalFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel3.setText("Total");
+
+        jttotal.setEditable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

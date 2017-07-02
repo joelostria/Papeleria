@@ -15,13 +15,20 @@ public class Categorias extends javax.swing.JInternalFrame {
     private CrudCategoria crud;
     DefaultTableModel modelo = new DefaultTableModel();
     int band = 0;
-    String cate, idcate;
+    String cate, idcate, usu;
     public Categorias() {
         initComponents();
+        usu = Menu.getUsuario();
         jtidcategoria.setEditable(false);
         crud = new CrudCategoria();
+        if(!"administrador".equals(usu)){
+            for(int i=0;i<jPanel2.getComponents().length;i++) {
+                jPanel2.getComponent(i).setEnabled(false);
+            }
+            jPanel1.getComponent(1).setEnabled(false);
+            jPanel1.getComponent(2).setEnabled(false);
+        }
         cargar("");
-        
     }
 
    

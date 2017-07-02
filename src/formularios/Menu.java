@@ -9,11 +9,10 @@ import javax.swing.UIManager;
 
 public class Menu extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Menu
-     */
+    static String usua;
     public Menu(String usu) {
         initComponents();
+        usua = usu;
         
         
         if("administrador".equals(usu)){
@@ -42,7 +41,6 @@ public class Menu extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -111,10 +109,6 @@ public class Menu extends javax.swing.JFrame {
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/3.png"))); // NOI18N
         jMenu3.setText("Consultas");
         jMenu3.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-
-        jMenuItem3.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        jMenuItem3.setText("Productos");
-        jMenu3.add(jMenuItem3);
 
         jMenuItem4.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jMenuItem4.setText("Boletas");
@@ -201,7 +195,9 @@ public class Menu extends javax.swing.JFrame {
         escritorio.add(col);
         col.show();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
-    
+    public static String getUsuario(){
+        return usua;
+    }
     
     public static void main(String args[]) {
         
@@ -242,7 +238,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     // End of variables declaration//GEN-END:variables
 }

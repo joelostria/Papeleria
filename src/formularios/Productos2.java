@@ -193,7 +193,7 @@ public class Productos2 extends javax.swing.JInternalFrame {
             String[]  dato = new String[8];
             int  fila = tabla5.getSelectedRow();
             if(fila==-1){
-                JOptionPane.showMessageDialog(null, "No  ha seleccionado ningun registro");
+                JOptionPane.showMessageDialog(null, "No ha seleccionado ningun registro");
             }
             else{
                 String id=tabla5.getValueAt(fila, 0).toString();
