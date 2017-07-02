@@ -62,7 +62,11 @@ public class Usuario extends javax.swing.JInternalFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabla3 = new javax.swing.JTable();
+        tabla3 = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false; //Disallow the editing of any cell
+            }
+        };
         btnmodificar = new javax.swing.JButton();
         btneliminar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();

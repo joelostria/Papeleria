@@ -83,7 +83,11 @@ public class Productos2 extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jtproducto = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabla5 = new javax.swing.JTable();
+        tabla5 = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false; //Disallow the editing of any cell
+            }
+        };
         jButton1 = new javax.swing.JButton();
         btnenviar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();

@@ -74,7 +74,11 @@ public class ConsultaBol extends javax.swing.JInternalFrame {
         jtnumero = new javax.swing.JTextField();
         fecha = new com.toedter.calendar.JDateChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabla7 = new javax.swing.JTable();
+        tabla7 = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false; //Disallow the editing of any cell
+            }
+        };
         btnver = new javax.swing.JButton();
         btneliminar = new javax.swing.JButton();
 

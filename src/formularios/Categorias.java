@@ -40,7 +40,11 @@ public class Categorias extends javax.swing.JInternalFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabla1 = new javax.swing.JTable();
+        tabla1 = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false; //Disallow the editing of any cell
+            }
+        };
         btnmodifcar = new javax.swing.JButton();
         btneliminar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();

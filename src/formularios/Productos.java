@@ -106,7 +106,11 @@ public class Productos extends javax.swing.JInternalFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabla2 = new javax.swing.JTable();
+        tabla2 = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false; //Disallow the editing of any cell
+            }
+        };
         jbmodificar = new javax.swing.JButton();
         jbeliminar = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
@@ -135,7 +139,11 @@ public class Productos extends javax.swing.JInternalFrame {
         btncancelar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTableProductos = new javax.swing.JTable();
+        jTableProductos = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false; //Disallow the editing of any cell
+            }
+        };
         btnReporte = new javax.swing.JButton();
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
