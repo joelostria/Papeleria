@@ -32,7 +32,11 @@ public class DetalleBol extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jtfecha = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabla8 = new javax.swing.JTable();
+        tabla8 = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false; //Disallow the editing of any cell
+            }
+        };
         jLabel3 = new javax.swing.JLabel();
         jttotal = new javax.swing.JTextField();
 
